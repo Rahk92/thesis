@@ -1,0 +1,11 @@
+*.pyc
+*.gif
+*.png
+*.jpg
+/log
+/result
+/runs
+/wgts
+MANIFEST
+dist/*
+.sync-config.cson

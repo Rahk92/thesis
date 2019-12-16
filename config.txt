@@ -1,0 +1,6 @@
+{
+    "dataset": "hezhang",
+    "root": "E:\\dataset/dehazing/dcpdn",
+    "haze": "train512",
+    "weights_path": "./wgts/hezhang"
+}
