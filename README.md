@@ -50,3 +50,7 @@ each 5 images from I-HAZE, O-HAZE, Dense-Haze dataset
 3. Dense-Haze : 51.png ~ 55.png (5)
 
 Total 15 images
+
+#### Pre-trained weight
+Download link 
+https://drive.google.com/open?id=1KqNAI1UKZdq-VtsGMq4fa9NL6Y4KGCq0
