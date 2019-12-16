@@ -1,4 +1,4 @@
-### DPPN(Dual Pyramid Pooling Network) with Single Image Haze Removal
+# DPPN(Dual Pyramid Pooling Network) with Single Image Haze Removal
 by Rahoon, Kang and Jechang Jeong
 
 ## Introduction
@@ -35,7 +35,7 @@ load_weight_path = "./wgts/MDN3/train/859.ckpt"
 
 ## Dataset
 
-# Training set
+### Training set
 Combination of I-HAZE, O-HAZE, Dense-Haze dataset
 1. I-HAZE : 01_indoor_.jpg ~ 25_indoor_.jpg (25)
 2. O-HAZE : 01_outdoor_.jpg ~ 40_indoor_.jpg (40)
@@ -43,7 +43,7 @@ Combination of I-HAZE, O-HAZE, Dense-Haze dataset
 
 Total 115 images
 
-# Validation set(Testing set)
+### Validation set(Testing set)
 each 5 images from I-HAZE, O-HAZE, Dense-Haze dataset
 1. I-HAZE : 31_indoor_.jpg ~ 35_indoor_.jpg (5)
 2. O-HAZE : 41_outdoor_.jpg ~ 45_outdoor_.jpg (5)
