@@ -1,74 +1,52 @@
-# pytorch-ssim
+### DPPN(Dual Pyramid Pooling Network) with Single Image Haze Removal
+by Rahoon, Kang and Jechang Jeong
 
-### Differentiable structural similarity (SSIM) index.
-![einstein](https://raw.githubusercontent.com/Po-Hsun-Su/pytorch-ssim/master/einstein.png) ![Max_ssim](https://raw.githubusercontent.com/Po-Hsun-Su/pytorch-ssim/master/max_ssim.gif)
+## Introduction
+this repository is for the my master's degree thesis. (Feb. 2020, Hanyang University)
 
-## Installation
-1. Clone this repo.
-2. Copy "pytorch_ssim" folder in your project.
+## Dependencies
+1. Pytorch >= 1.0.0 (Mine is 1.2.0)
+2. Pillow
+3. (optional) PyCharm IDE
 
-## Example
-### basic usage
-```python
-import pytorch_ssim
-import torch
-from torch.autograd import Variable
-
-img1 = Variable(torch.rand(1, 1, 256, 256))
-img2 = Variable(torch.rand(1, 1, 256, 256))
-
-if torch.cuda.is_available():
-    img1 = img1.cuda()
-    img2 = img2.cuda()
-
-print(pytorch_ssim.ssim(img1, img2))
-
-ssim_loss = pytorch_ssim.SSIM(window_size = 11)
-
-print(ssim_loss(img1, img2))
-
-```
-### maximize ssim
-```python
-import pytorch_ssim
-import torch
-from torch.autograd import Variable
-from torch import optim
-import cv2
-import numpy as np
-
-npImg1 = cv2.imread("einstein.png")
-
-img1 = torch.from_numpy(np.rollaxis(npImg1, 2)).float().unsqueeze(0)/255.0
-img2 = torch.rand(img1.size())
-
-if torch.cuda.is_available():
-    img1 = img1.cuda()
-    img2 = img2.cuda()
-
-
-img1 = Variable( img1,  requires_grad=False)
-img2 = Variable( img2, requires_grad = True)
-
-
-# Functional: pytorch_ssim.ssim(img1, img2, window_size = 11, size_average = True)
-ssim_value = pytorch_ssim.ssim(img1, img2).data[0]
-print("Initial ssim:", ssim_value)
-
-# Module: pytorch_ssim.SSIM(window_size = 11, size_average = True)
-ssim_loss = pytorch_ssim.SSIM()
-
-optimizer = optim.Adam([img2], lr=0.01)
-
-while ssim_value < 0.95:
-    optimizer.zero_grad()
-    ssim_out = -ssim_loss(img1, img2)
-    ssim_value = - ssim_out.data[0]
-    print(ssim_value)
-    ssim_out.backward()
-    optimizer.step()
-
+## Usuage
+For training, run 'train.py' with tranining configuration, which is located in line 29 to 39 in 'train.py'
+```shell
+# Train configuration
+batch_size = 2
+aug = 10     #min == 1
+num_epochs = 1000
+learning_rate = 0.0001
+early_stop = 0
+early_stop_setting = 1000
+restart = 0
+fine = False
+padd = 0
+pad_setting = [0, 0]
+val_save = False
 ```
 
-## Reference
-https://ece.uwaterloo.ca/~z70wang/research/ssim/
+For testing, run 'test.py' with weight in '/wgts' folder and weight path which is located in line 23 to 26 in 'test.py'
+```shell
+test_path = 'E:/dataset/dehazing/mydataset/Valid/2018/'
+result_path = './result/MDN3/2018'
+load_weight_path = "./wgts/MDN3/train/859.ckpt"
+```
+
+## Dataset
+
+# Training set
+Combination of I-HAZE, O-HAZE, Dense-Haze dataset
+1. I-HAZE : 01_indoor_.jpg ~ 25_indoor_.jpg (25)
+2. O-HAZE : 01_outdoor_.jpg ~ 40_indoor_.jpg (40)
+3. Dense-Haze : 01.png ~ 50.png (50)
+
+Total 115 images
+
+# Validation set(Testing set)
+each 5 images from I-HAZE, O-HAZE, Dense-Haze dataset
+1. I-HAZE : 31_indoor_.jpg ~ 35_indoor_.jpg (5)
+2. O-HAZE : 41_outdoor_.jpg ~ 45_outdoor_.jpg (5)
+3. Dense-Haze : 51.png ~ 55.png (5)
+
+Total 15 images
