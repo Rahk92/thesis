@@ -1,5 +1,5 @@
 # DPPN(Dual Pyramid Pooling Network) with Single Image Haze Removal
-by Rahoon, Kang and Jechang Jeong
+by Rahoon Kang and Jechang Jeong
 
 ## Introduction
 this repository is for the my master's degree thesis. (Feb. 2020, Hanyang University)
